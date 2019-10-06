@@ -1,0 +1,104 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div id="wrapper">
+        <div class="container">
+            <div class="content">
+                <div id="title">
+                    <h1>Importação de XML</h1>
+
+                </div>
+                <div id="file-upload">
+                    <form action="upload" id="xml-upload">
+                        <div class="dz-message needsclick">
+                            Arraste os arquivo para essa área ou clique aqui para enviar.<br>
+                        </div>
+                    </form>
+                    <button id="enviar">Enviar</button>
+                </div>
+                <div id="processing" style="display: none">
+
+                </div>
+            </div>
+
+            <div id="preview-template" style="display: none;">
+
+                <div class="dz-preview dz-file-preview">
+                    <div class="dz-image" style="display: none"><img data-dz-thumbnail=""></div>
+
+                    <div class="dz-details">
+                        <div class="dz-size"><span data-dz-size=""></span></div>
+                        <div class="dz-filename"><span data-dz-name=""></span></div>
+                    </div>
+                    <div class="dz-progress"><span class="dz-upload" data-dz-uploadprogress=""></span></div>
+                    <div class="dz-error-message" style="display: none"><span data-dz-errormessage=""></span></div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block stylesheets %}
+    <link href="/assets/css/main.css" type="text/css" rel="stylesheet" />
+    <link href="/assets/css/dropzone.css" type="text/css" rel="stylesheet" />
+{% endblock %}
+{% block javascripts %}
+    <script src="/assets/js/jquery.min.js"></script>
+    <script src="/assets/js/dropzone.min.js"> </script>
+    <script>
+        $(document).ready(function () {
+            var dropzone = new Dropzone('#xml-upload',{
+                acceptedFiles:'.xml',
+                autoProcessQueue: false,
+                previewTemplate: document.querySelector('#preview-template').innerHTML,
+                parallelUploads: 2,
+            });
+
+
+
+            async function postfile(file){
+                let response = await new Promise(resolve => {
+                    let req = new XMLHttpRequest();
+                    let formData = new FormData();
+                    formData.append("xml", file);
+                    req.open("POST", '/upload/xml');
+
+                    req.onload = function()
+                    {
+                        resolve(req.response);
+                    };
+                    req.onerror = function () {
+                        alert("** Ocorreu um erro durante o processamento");
+                        resolve(undefined);
+                    };
+                    req.send(formData);
+                })
+                return response;
+
+            }
+
+            $("#enviar").click(async function () {
+                var files = dropzone.getQueuedFiles();
+                $("#file-upload").css('display','none');
+                $("#processing").css('display','inherit');
+                $("#processing").append("<p>Processando...</p>")
+                for(var i=0; i<files.length; i++){
+                    var file = files[i];
+                    console.log(file);
+                    let resp  =  await postfile(file);
+                    resp = JSON.parse(resp);
+                    console.log(resp);
+                    $("#processing").append(`<p>${file.name}: ${resp.response_text}</p>`);
+                    console.log("FILE UPLOADED");
+                }
+                $("#processing").append('<button onclick="window.location.reload()">Ok</button>')
+
+
+            });
+
+
+        })
+
+    </script>
+{% endblock %}

@@ -1,0 +1,62 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins:300,400,500&display=swap');
+html {
+    height: 100%;
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background: -webkit-linear-gradient(bottom left, #3A92AF 0%, #5CA05A 100%);
+    background: -moz-linear-gradient(bottom left, #3A92AF 0%, #5CA05A 100%);
+    background: -o-linear-gradient(bottom left, #3A92AF 0%, #5CA05A 100%);
+    background: linear-gradient(to top right, #3A92AF 0%, #5CA05A 100%);
+}
+
+.container{
+    width: 800px;
+    height: 310px;
+    background: #fff;
+    box-shadow: 8px 10px 15px 0 rgba(0,0,0,0.2);
+    border-radius: 3px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 40px;
+    margin-top: 80px;
+
+}
+#xml-upload {
+    height: 122px;
+    border: 3px dashed #4c9786;
+    padding: 20px;
+}
+
+.dz-preview {
+    float: left;
+    width: 180px;
+    background: #b3b3b3;
+    margin-left: 10px;
+    padding: 10px;
+}
+
+button{
+    height: 40px;
+    margin-top: 23px;
+    width: 140px;
+    text-decoration: none;
+    color: #fff;
+    background-color: #26a69a;
+    text-align: center;
+    letter-spacing: .5px;
+    -webkit-transition: background-color .2s ease-out;
+    transition: background-color .2s ease-out;
+    cursor: pointer;
+    border: none;
+    outline:none;
+    font-size: 15px;
+    text-transform: uppercase;
+    font-weight: 400;
+}
+
+#enviar:hover {
+    background-color: #2bbbad;
+    -webkit-box-shadow: 0 3px 3px 0 rgba(0,0,0,0.14), 0 1px 7px 0 rgba(0,0,0,0.12), 0 3px 1px -1px rgba(0,0,0,0.2);
+    box-shadow: 0 3px 3px 0 rgba(0,0,0,0.14), 0 1px 7px 0 rgba(0,0,0,0.12), 0 3px 1px -1px rgba(0,0,0,0.2);
+}
