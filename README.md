@@ -1,5 +1,4 @@
 Orientações
 ============================== 
-Para baixar as depedências utilizar comando *php composer.phar install*
+Para baixar as depedências utilizando o comando *php composer.phar install* no terminal
 
-Projeto coonfigurado para utilizar o Docker
